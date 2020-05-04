@@ -7,12 +7,9 @@
       </div>
       <div v-for="(card,i) in cards" :key="i" class="col-md-12">
         <b-card class="mb-1">
-          <b-card-text
-            style="max-width=200"
-            class="d-flex justify-content-between align-items-center"
-          >
+          <b-card-text class="d-flex justify-content-between align-items-center">
             <h3 class="m-0 text-uppercase">{{card.name}}</h3>
-            <h3 class="m-0 text-bold">{{card.number}}</h3>
+            <h3 class="m-0 text-bold text-center text-center ml-auto mr-auto">{{card.number}}</h3>
             <span v-if="status">{{statusSym(card.status)}}</span>
           </b-card-text>
           <b-button
@@ -34,7 +31,8 @@ export default {
   data() {
     return {
       status: false,
-      cards: []
+      cards: [],
+      interval: null
     };
   },
   methods: {
@@ -58,15 +56,16 @@ export default {
       }
     },
     stopAll() {
-      this.cards.forEach(card => {
-        this.stopRandomNumber(card);
-      });
+      this.$store.dispatch("stopAll");
     },
     startAll() {
       this.cards.forEach(card => {
         this.startRandomNumber(card);
       });
     }
+  },
+  destroyed() {
+    clearInterval(this.interval);
   },
   computed: {},
   mounted() {
@@ -75,7 +74,7 @@ export default {
     setTimeout(() => {
       this.status = true;
     }, 2000);
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.cards.forEach(card => {
         this.$store.dispatch("getRandomNumber", card.name);
       });

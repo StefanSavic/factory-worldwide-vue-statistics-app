@@ -9,57 +9,67 @@ export default new Vuex.Store({
         name: "a",
         number: 3,
         status: true,
-        start: true
+        start: true,
+        trend: []
       }, {
         name: "b",
         number: 3,
         status: true,
-        start: true
+        start: true,
+        trend: []
       }, {
         name: "c",
         number: 3,
         status: true,
-        start: true
+        start: true,
+        trend: []
       }, {
         name: "d",
         number: 3,
         status: true,
-        start: true
+        start: true,
+        trend: []
       }, {
         name: "f",
         number: 3,
         status: true,
-        start: true
+        start: true,
+        trend: []
       },
       {
         name: "g",
         number: 3,
         status: true,
-        start: true
+        start: true,
+        trend: []
       },
       {
         name: "h",
         number: 3,
         status: true,
-        start: true
+        start: true,
+        trend: []
       },
       {
         name: "j",
         number: 3,
         status: true,
-        start: true
+        start: true,
+        trend: []
       },
       {
         name: "k",
         number: 3,
         status: true,
-        start: true
+        start: true,
+        trend: []
       },
       {
         name: "l",
         number: 3,
         status: true,
-        start: true
+        start: true,
+        trend: []
       }
     ]
   },
@@ -70,6 +80,7 @@ export default new Vuex.Store({
       });
 
       let oldNumber = cardInCards.number;
+      cardInCards.trend.push(oldNumber);
       if (cardInCards.start) {
         cardInCards.number = Math.floor(Math.random() * 2) + 1;
       }
@@ -88,6 +99,13 @@ export default new Vuex.Store({
       cardInCards.start = false;
       console.log("stop", cardInCards);
     },
+    STOP_ALL(state) {
+      state.cards.forEach(card => {
+        card.start = false;
+      })
+
+
+    },
     START_RANDOM_NUMBER(state, payload) {
       let cardInCards = state.cards.find(cardInCards => {
         return cardInCards.name == payload;
@@ -98,6 +116,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    stopAll(context, payload) {
+      context.commit("STOP_ALL", payload);
+    },
     getRandomNumber(context, payload) {
       context.commit("GET_RANDOM_NUMBER", payload);
     },

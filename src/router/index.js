@@ -7,7 +7,8 @@ Vue.use(VueRouter)
 const routes = [{
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+
   },
   {
     path: '/statistics',
@@ -22,5 +23,7 @@ const routes = [{
 const router = new VueRouter({
   routes
 })
+
+
 
 export default router
