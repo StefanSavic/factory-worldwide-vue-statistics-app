@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav" class="shadow-md mb-4">
+    <div id="nav" class="shadow-md mb-3">
       <a class="navbar-brand logo" href="#">
         <img width="30" height="30" class="mr-auto" src="./assets/chart.png" alt />
       </a>
@@ -19,7 +19,6 @@ html {
   background: #264348;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   font-family: "Quicksand", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
