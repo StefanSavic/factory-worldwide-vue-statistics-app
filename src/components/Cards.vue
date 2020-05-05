@@ -1,33 +1,36 @@
 <template>
-  <div class="container">
+  <div class="cards container d-flex pt-3">
     <div class="row">
-      <div class="col-md-12 mb-1 d-flex justify-content-between align-items-center">
-        <b-button variant="danger" @click="stopAll()">Stop Random Numbers</b-button>
-        <b-button variant="success" @click="startAll()">Start Random Numbers</b-button>
-      </div>
-      <div v-for="(card,i) in cards" :key="i" class="col-md-12">
-        <b-card class="mb-1">
-          <b-card-text class="d-flex justify-content-between align-items-center">
-            <h3 class="m-0 text-uppercase">{{card.name}}</h3>
-            <h3 class="m-0 text-bold text-center text-center ml-auto mr-auto">{{card.number}}</h3>
-            <span v-if="status">{{statusSym(card.status)}}</span>
-          </b-card-text>
-          <b-button
-            style="color:white;"
-            href="#"
-            variant="danger"
-            @click="handleClickButton(card)"
-          >{{startStatus(card.start)}}</b-button>
-        </b-card>
+      <div v-for="(card,i) in cards" :key="i" class="col-md-6 col-sm-6 col-xs-6 mb-4">
+        <Card>
+          <CardTitle>{{card.name}}</CardTitle>
+          <CardNumber>{{card.number}}</CardNumber>
+          <CardStatus :card="card"></CardStatus>
+          <template v-slot:button>
+            <CardStopButton :card="card"></CardStopButton>
+          </template>
+        </Card>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Card from "@/components/Card.vue";
+import CardTitle from "@/components/CardTitle.vue";
+import CardNumber from "@/components/CardNumber.vue";
+import CardStatus from "@/components/CardStatus.vue";
+import CardStopButton from "@/components/CardStopButton.vue";
 export default {
   name: "Cards",
-  props: {},
+  props: ["Card"],
+  components: {
+    Card,
+    CardTitle,
+    CardNumber,
+    CardStatus,
+    CardStopButton
+  },
   data() {
     return {
       status: false,
@@ -35,37 +38,10 @@ export default {
       interval: null
     };
   },
-  methods: {
-    statusSym(s) {
-      return s ? "+" : "-";
-    },
-    startRandomNumber(n) {
-      this.$store.dispatch("startRandomNumber", n.name);
-    },
-    stopRandomNumber(n) {
-      this.$store.dispatch("stopRandomNumber", n.name);
-    },
-    startStatus(s) {
-      return s ? "stop" : "start";
-    },
-    handleClickButton(c) {
-      if (c.start) {
-        this.stopRandomNumber(c);
-      } else if (!c.start) {
-        this.startRandomNumber(c);
-      }
-    },
-    stopAll() {
-      this.$store.dispatch("stopAll");
-    },
-    startAll() {
-      this.cards.forEach(card => {
-        this.startRandomNumber(card);
-      });
-    }
-  },
+  methods: {},
   destroyed() {
     clearInterval(this.interval);
+    this.status = true;
   },
   computed: {},
   mounted() {
@@ -85,9 +61,14 @@ export default {
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-* {
-  transition: all 0.5 linear;
+<style  lang="scss">
+.card__details--name {
+  color: #264348;
+  font-weight: 600;
+}
+.cards,
+.home {
+  background: #264348;
 }
 h3 {
   margin: 40px 0 0;
@@ -100,7 +81,38 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-a {
-  color: #42b983;
+
+.card {
+  // border: 1px solid #100c08;
+  // background: #eaeaea;
+  // background: #e8eaf6 !important;
+  min-height: 134px;
+}
+.card__details {
+  max-width: 30px;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  font-weight: 600;
+}
+.card__details--number {
+  transform: translateX(22px);
+  font-size: 20px;
+  border: 1px solid w;
+  border-radius: 3px;
+}
+
+.stopButton {
+  background: #9d2933 !important;
+  border: 1px solid #9d2933;
+}
+
+.green {
+  color: #264348;
+}
+
+.red {
+  color: #9d2933;
 }
 </style>
