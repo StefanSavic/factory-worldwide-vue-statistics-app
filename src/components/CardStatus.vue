@@ -67,28 +67,7 @@ export default {
   color: #264348;
   font-weight: 600;
 }
-.cards,
-.home {
-  background: #264348;
-}
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 
-.card {
-  // border: 1px solid #100c08;
-  // background: #eaeaea;
-  // background: #e8eaf6 !important;
-  min-height: 134px;
-}
 .card__details {
   max-width: 30px;
   width: 30px;
@@ -104,16 +83,11 @@ li {
   border-radius: 3px;
 }
 
-.stopButton {
-  background: #9d2933 !important;
-  border: 1px solid #9d2933;
-}
-
 .green {
   color: #264348;
 }
 
 .red {
-  color: #9d2933;
+  color: #842700;
 }
 </style>

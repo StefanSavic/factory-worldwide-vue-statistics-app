@@ -14,16 +14,6 @@ export default {
       cards: [],
       interval: null
     };
-  },
-  methods: {},
-  destroyed() {
-    clearInterval(this.interval);
-    this.status = true;
-  },
-  mounted() {
-    setTimeout(() => {
-      this.status = true;
-    }, 2000);
   }
 };
 </script>
